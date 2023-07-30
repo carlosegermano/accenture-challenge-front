@@ -1,0 +1,24 @@
+.header-box {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  background-color: var(--color-primary);
+  padding-left: 20px;
+}
+
+.image-logo {
+  height: 30px;
+  border-radius: 100%;
+}
+
+.title {
+  color: var(--color-tertiary);
+  padding-left: 20px;
+  letter-spacing: 5px;
+}
+
+.home-icon {
+  color: var(--color-tertiary);
+  font-size: auto;
+}
