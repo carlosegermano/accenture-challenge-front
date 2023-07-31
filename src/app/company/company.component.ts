@@ -11,7 +11,7 @@ import { CompanyAddComponent } from './company-add/company-add.component';
   styleUrls: ['./company.component.css'],
 })
 export class CompanyComponent implements OnInit {
-  company?: Company;
+  company!: Company;
   companies: Company[] = [];
   displayedColumns: string[] = [
     'id',
@@ -47,7 +47,17 @@ export class CompanyComponent implements OnInit {
     });
   }
 
-  openEditDialog(company: Company) {}
+  openEditDialog(company: Company) {
+    const dialogRef = this.dialog.open(CompanyAddComponent, {
+      height: '80%',
+      data: { company: company },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.company = result;
+      this.getCompanies();
+    });
+  }
 
   openDeleteDialog(company: Company) {}
 

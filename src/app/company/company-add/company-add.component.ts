@@ -7,9 +7,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { CompanyService } from 'src/app/services/company.service';
+import { MessageService } from 'src/app/services/message.service';
 
 interface DialogData {
-  client: Company;
+  company: Company;
 }
 
 @Component({
@@ -20,11 +22,7 @@ interface DialogData {
 export class CompanyAddComponent implements OnInit {
   title: string = '';
 
-  company = {
-    cnpj: '',
-    tradeName: '',
-    zipCode: '',
-  };
+  company!: Company;
 
   companyForm = new FormGroup({
     cnpj: new FormControl('', [
@@ -38,11 +36,13 @@ export class CompanyAddComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<CompanyAddComponent>,
+    private companyService: CompanyService,
+    private messageService: MessageService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {}
 
   ngOnInit(): void {
-    this.company = this.data?.client;
+    this.company = this.data?.company;
 
     this.title =
       this.company === undefined || this.company === null
@@ -55,7 +55,33 @@ export class CompanyAddComponent implements OnInit {
   }
 
   saveCompany() {
-    console.log(this.company);
+    if (this.company?.id === undefined || this.company?.id === null) {
+      this.companyService.saveCompany(this.companyForm.value).subscribe(
+        () => {
+          this.messageService.showSuccessMessage('Empresa salva com sucesso!');
+          this.dialogRef.close();
+        },
+        (error) => {
+          this.messageService.showErrorMessage(
+            JSON.stringify(error.error.message)
+          );
+        }
+      );
+    } else {
+      this.companyService
+        .updateCompany(this.company.id, this.companyForm.value)
+        .subscribe(
+          () => {
+            this.messageService.showSuccessMessage(
+              'Empresa alterada com sucesso!'
+            );
+            this.dialogRef.close();
+          },
+          (error) => {
+            this.messageService.showErrorMessage(error.error.message);
+          }
+        );
+    }
   }
 
   cancel(): void {

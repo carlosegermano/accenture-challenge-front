@@ -12,6 +12,19 @@ export class CompanyService {
 
   constructor(private http: HttpClient) {}
 
+  saveCompany(company: any): Observable<Company> {
+    return this.http.post<Company>(this.url, company);
+  }
+
+  updateCompany(id: Number, company: any): Observable<Company> {
+    console.log(typeof company.id);
+    return this.http.put<Company>(this.url + `/${Number(id)}`, company);
+  }
+
+  deleteCompany(company: any): void {
+    this.http.delete<Company>(this.url + `/${company.id}`);
+  }
+
   getCompanies(): Observable<Company[]> {
     return this.http.get<Company[]>(this.url);
   }
