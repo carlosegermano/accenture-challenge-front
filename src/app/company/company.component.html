@@ -1,1 +1,90 @@
-<p>company works!</p>
+<div class="container mat-elevation-z8 principal">
+  <button
+    mat-raised-button
+    (click)="openAddDialog()"
+    class="btn btn-lg btn-outline-primary add-button"
+  >
+    <mat-icon matSuffix>add_circle_outline</mat-icon>
+    <p class="text">Nova Empresa</p>
+  </button>
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource">
+      <div class="table-header">
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+        </ng-container>
+
+        <!-- CNPJ Column -->
+        <ng-container matColumnDef="cnpj">
+          <th mat-header-cell *matHeaderCellDef>CNPJ</th>
+          <td mat-cell *matCellDef="let row">{{ row.cnpj }}</td>
+        </ng-container>
+
+        <!-- Trade Name Column -->
+        <ng-container matColumnDef="tradeName">
+          <th mat-header-cell *matHeaderCellDef>Nome da Empresa</th>
+          <td mat-cell *matCellDef="let row">{{ row.tradeName }}</td>
+        </ng-container>
+
+        <!-- Zip Code Column -->
+        <ng-container matColumnDef="zipCode">
+          <th mat-header-cell *matHeaderCellDef>CEP</th>
+          <td mat-cell *matCellDef="let row">{{ row.zipCode }}</td>
+        </ng-container>
+
+        <!-- Address Column -->
+        <ng-container matColumnDef="address">
+          <th mat-header-cell *matHeaderCellDef>Endereço</th>
+          <td mat-cell *matCellDef="let row">
+            {{
+              (row.address?.logradouro != undefined
+                ? row.address?.logradouro + " "
+                : "") +
+                " - " +
+                (row.address?.cidade != undefined &&
+                row.address?.uf != undefined
+                  ? row.address?.cidade + "/" + row.address?.uf
+                  : "")
+            }}
+          </td>
+        </ng-container>
+      </div>
+      <!-- Menu -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
+        <td class="actions-column" mat-cell *matCellDef="let row">
+          <button
+            class="button-actions"
+            mat-icon-button
+            [matMenuTriggerFor]="menu"
+            aria-label="Ícone com menu"
+          >
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button class="button-menu" mat-menu-item>
+              <mat-icon class="icon-edit" (click)="openEditDialog(row)"
+                >edit</mat-icon
+              >
+            </button>
+            <button class="button-menu" mat-menu-item>
+              <mat-icon class="icon-delete" (click)="openDeleteDialog(row)"
+                >delete</mat-icon
+              >
+            </button>
+          </mat-menu>
+        </td>
+      </ng-container>
+
+      <div>
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedColumns; sticky: true"
+        ></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </div>
+    </table>
+  </div>
+</div>

@@ -7,6 +7,10 @@ import { SupplierComponent } from './supplier/supplier.component';
 import { HeaderComponent } from './header/header.component';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,7 +19,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SupplierComponent,
     HeaderComponent,
   ],
-  imports: [BrowserModule, MatIconModule, BrowserAnimationsModule],
+  imports: [
+    BrowserModule,
+    MatIconModule,
+    BrowserAnimationsModule,
+    MatMenuModule,
+    MatTableModule,
+    MatDialogModule,
+    HttpClientModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
