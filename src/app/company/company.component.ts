@@ -40,6 +40,7 @@ export class CompanyComponent implements OnInit {
     this.companyService.getCompanies().subscribe((data) => {
       this.companies = data;
       this.dataSource.data = data;
+      console.log(data);
     });
   }
 }
