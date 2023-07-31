@@ -2,6 +2,8 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Company } from './company.model';
 import { CompanyService } from '../services/company.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CompanyAddComponent } from './company-add/company-add.component';
 
 @Component({
   selector: 'app-company',
@@ -9,6 +11,7 @@ import { CompanyService } from '../services/company.service';
   styleUrls: ['./company.component.css'],
 })
 export class CompanyComponent implements OnInit {
+  company?: Company;
   companies: Company[] = [];
   displayedColumns: string[] = [
     'id',
@@ -24,13 +27,25 @@ export class CompanyComponent implements OnInit {
 
   @ViewChild(MatTable) table!: MatTable<Company[]>;
 
-  constructor(private companyService: CompanyService) {}
+  constructor(
+    private companyService: CompanyService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.getCompanies();
   }
 
-  openAddDialog() {}
+  openAddDialog() {
+    const dialogRef = this.dialog.open(CompanyAddComponent, {
+      height: '80%',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.company = result;
+      this.getCompanies();
+    });
+  }
 
   openEditDialog(company: Company) {}
 
@@ -40,7 +55,6 @@ export class CompanyComponent implements OnInit {
     this.companyService.getCompanies().subscribe((data) => {
       this.companies = data;
       this.dataSource.data = data;
-      console.log(data);
     });
   }
 }

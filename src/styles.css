@@ -10,7 +10,7 @@ body {
 }
 
 :root {
-  --color-primary: rgb(8, 21, 104);
+  --color-primary: #3f51b5;
   --color-secondary: rgb(134, 122, 13);
   --color-tertiary: #fff;
   --color-warn: rgb(192, 0, 0);

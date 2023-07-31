@@ -1,3 +1,7 @@
+table {
+  width: 100%;
+}
+
 .principal {
   position: relative;
   padding-top: 10px;
@@ -9,10 +13,10 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 160px;
+  width: auto;
   height: 40px;
   margin: 10px;
-  padding: 0 4px;
+  padding: 0 8px;
   background-color: var(--color-secondary);
   color: var(--color-tertiary);
   font-size: 1em;
@@ -23,10 +27,6 @@
   min-height: 200px;
   max-height: 76vh;
   overflow: auto;
-}
-
-table {
-  width: 100%;
 }
 
 .table-header {

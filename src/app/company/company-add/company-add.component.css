@@ -1,0 +1,26 @@
+mat-form-field {
+  width: calc(100% - 20px);
+  margin: 10px;
+}
+
+.principal {
+  width: 600px;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+}
+
+.title-text {
+  font-size: 2em;
+}
+
+.buttons-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.save-button {
+  margin-right: 10px;
+}

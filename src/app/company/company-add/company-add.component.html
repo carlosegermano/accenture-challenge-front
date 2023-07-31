@@ -1,0 +1,73 @@
+<div class="principal">
+  <mat-label class="title">
+    <h1 class="title-text">{{ title }}</h1>
+  </mat-label>
+  <div
+    class="form"
+    [formGroup]="companyForm"
+    #f="ngForm"
+    (ngSubmit)="onSubmit(f)"
+  >
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Nome</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="cnpj"
+          placeholder="Digite o número do CNPJ"
+          required
+        />
+        <mat-hint>Ex.: 12345678901234</mat-hint>
+        <!-- <mat-error *ngIf="cnpj.invalid && (cnpj.dirty || cnpj.touched)"
+        >E-mail inválido!</mat-error
+      > -->
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Nome da Empresa</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="tradeName"
+          placeholder="Digite o nome da Empresa"
+          required
+        />
+        <mat-hint>Ex.: Coco Verde Ltda</mat-hint>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>CEP</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="zipCode"
+          placeholder="Digite o CEP"
+          mask="00.000-000"
+          required
+        />
+        <mat-icon matSuffix>zipCode</mat-icon>
+        <mat-hint>Ex.: 00.000-000</mat-hint>
+        <!-- <mat-error *ngIf="zipCode.invalid && (zipCode.dirty || zipCode.touched)"
+        >Telefone inválido. Digite dessa forma: (99) 99999-9999</mat-error
+      > -->
+      </mat-form-field>
+    </p>
+    <div class="buttons-actions">
+      <button
+        mat-raised-button
+        color="primary"
+        class="save-button"
+        (click)="saveCompany()"
+        [disabled]="!f.valid"
+      >
+        Salvar
+      </button>
+      <button mat-raised-button color="warn" (click)="cancel()">
+        Cancelar
+      </button>
+    </div>
+  </div>
+</div>
