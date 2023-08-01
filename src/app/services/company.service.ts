@@ -17,12 +17,11 @@ export class CompanyService {
   }
 
   updateCompany(id: Number, company: any): Observable<Company> {
-    console.log(typeof company.id);
-    return this.http.put<Company>(this.url + `/${Number(id)}`, company);
+    return this.http.put<Company>(this.url + `/${id}`, company);
   }
 
-  deleteCompany(company: any): void {
-    this.http.delete<Company>(this.url + `/${company.id}`);
+  deleteCompany(company: Company): any {
+    return this.http.delete<Company>(this.url + `/${company.id}`);
   }
 
   getCompanies(): Observable<Company[]> {

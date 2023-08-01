@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { CompanyComponent } from './company/company.component';
 import { SupplierComponent } from './supplier/supplier.component';
@@ -11,13 +10,18 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
-import { CompanyAddComponent } from './company/company-add/company-add.component';
+import { CompanyDialogComponent } from './company/company-dialog/company-dialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MessageService } from './services/message.service';
+import { SupplierDialogComponent } from './supplier/supplier-dialog/supplier-dialog.component';
+import { ConfirmationDialogComponent } from './utils/confirmation-dialog/confirmation-dialog.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,9 @@ import { MessageService } from './services/message.service';
     CompanyComponent,
     SupplierComponent,
     HeaderComponent,
-    CompanyAddComponent,
+    CompanyDialogComponent,
+    SupplierDialogComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +43,9 @@ import { MessageService } from './services/message.service';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRadioModule,
     ReactiveFormsModule,
     HttpClientModule,
     MatSnackBarModule,

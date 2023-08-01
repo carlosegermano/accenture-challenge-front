@@ -1,4 +1,4 @@
-import { Company } from './../company.model';
+import { Company } from '../company.model';
 import { Component, Inject, OnInit } from '@angular/core';
 import {
   FormGroup,
@@ -15,11 +15,11 @@ interface DialogData {
 }
 
 @Component({
-  selector: 'app-company-add',
-  templateUrl: './company-add.component.html',
-  styleUrls: ['./company-add.component.css'],
+  selector: 'app-company-dialog',
+  templateUrl: './company-dialog.component.html',
+  styleUrls: ['./company-dialog.component.css'],
 })
-export class CompanyAddComponent implements OnInit {
+export class CompanyDialogComponent implements OnInit {
   title: string = '';
 
   company!: Company;
@@ -27,15 +27,17 @@ export class CompanyAddComponent implements OnInit {
   companyForm = new FormGroup({
     cnpj: new FormControl('', [
       Validators.required,
-      Validators.minLength(11),
-      Validators.maxLength(14),
+      Validators.pattern('d{14}'),
     ]),
     tradeName: new FormControl('', [Validators.required]),
-    zipCode: new FormControl('', [Validators.required]),
+    zipCode: new FormControl('', [
+      Validators.required,
+      Validators.pattern('d{8}'),
+    ]),
   });
 
   constructor(
-    private dialogRef: MatDialogRef<CompanyAddComponent>,
+    private dialogRef: MatDialogRef<CompanyDialogComponent>,
     private companyService: CompanyService,
     private messageService: MessageService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData

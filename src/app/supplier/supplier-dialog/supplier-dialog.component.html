@@ -1,0 +1,114 @@
+<div class="principal">
+  <mat-label class="title">
+    <h1 class="title-text">{{ title }}</h1>
+  </mat-label>
+  <div
+    class="form"
+    [formGroup]="supplierForm"
+    #f="ngForm"
+    (ngSubmit)="onSubmit(f)"
+  >
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>CPF/CNPJ</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="nationalDocument"
+          placeholder="Digite o número do CPF/CNPJ"
+          required
+        />
+        <mat-hint>Ex.: 12345678900 (sem pontuação)</mat-hint>
+        <!-- <mat-error *ngIf="cnpj.invalid && (cnpj.dirty || cnpj.touched)"
+        >E-mail inválido!</mat-error
+      > -->
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Nome do Fornecedor</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="name"
+          placeholder="Digite o nome do Fornecedor"
+          required
+        />
+        <mat-hint>Ex.: Coco Verde Ltda</mat-hint>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>E-mail</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="email"
+          placeholder="Digite o e-mail"
+          mask="/[a-z]/, '@',  /[a-z]/, '.', /[a-z]/"
+          required
+        />
+        <mat-icon matSuffix>alternative_email</mat-icon>
+        <mat-hint>Ex.: fornecedor@gmail.com</mat-hint>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>CEP</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="zipCode"
+          placeholder="Digite o CEP"
+          mask="d{8}"
+          required
+        />
+        <mat-icon matSuffix>zip-code</mat-icon>
+        <mat-hint>Ex.: 12345678 (sem pontuação)</mat-hint>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>RG</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="nationalId"
+          placeholder="Digite o número do RG"
+          mask="^d{7}$"
+        />
+        <mat-hint>Ex.: 1234567 (sem pontuação)</mat-hint>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Data de Nascimento</mat-label>
+        <input
+          matInput
+          formControlName="birthday"
+          placeholder="Data de nascimento"
+          [matDatepicker]="picker"
+        />
+        <mat-hint>dd/mm/aaaa</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </p>
+    <div class="buttons-actions">
+      <button
+        mat-raised-button
+        color="primary"
+        class="save-button"
+        (click)="saveSupplier()"
+        [disabled]="!f.valid"
+      >
+        Salvar
+      </button>
+      <button mat-raised-button color="warn" (click)="cancel()">
+        Cancelar
+      </button>
+    </div>
+  </div>
+</div>
