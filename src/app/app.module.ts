@@ -22,6 +22,7 @@ import { ConfirmationDialogComponent } from './utils/confirmation-dialog/confirm
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
+import { routing } from './app.routing';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { MatRadioModule } from '@angular/material/radio';
     ReactiveFormsModule,
     HttpClientModule,
     MatSnackBarModule,
+    routing,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent],
