@@ -1,13 +1,17 @@
 <div class="container mat-elevation-z8 principal">
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="openAddDialog()"
-    class="btn btn-lg btn-outline-primary add-button"
-  >
-    <mat-icon matSuffix>add_circle_outline</mat-icon>
-    <p class="text">Novo Fornecedor</p>
-  </button>
+  <div class="button-box">
+    <button
+      mat-raised-button
+      (click)="openAddDialog()"
+      class="btn btn-lg btn-outline-primary add-button"
+    >
+      <mat-icon matSuffix>add_circle_outline</mat-icon>
+      <p class="text">Novo Fornecedor</p>
+    </button>
+    <button mat-button [routerLink]="['/companies']" class="button-icon">
+      <mat-icon class="routing-icon">store</mat-icon>
+    </button>
+  </div>
   <div class="table-container">
     <table mat-table [dataSource]="dataSource">
       <div class="table-header">

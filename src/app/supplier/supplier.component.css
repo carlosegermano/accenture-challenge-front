@@ -9,6 +9,14 @@ table {
   margin-right: 5px;
 }
 
+.button-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 10px;
+}
+
 .add-button {
   display: flex;
   align-items: center;
@@ -20,6 +28,19 @@ table {
   background-color: var(--color-secondary);
   color: var(--color-tertiary);
   font-size: 1em;
+}
+
+.button-icon {
+  display: flex;
+  justify-content: center;
+  background-color: var(--color-secondary);
+}
+
+.routing-icon {
+  color: var(--color-tertiary);
+  width: auto;
+  height: auto;
+  margin: 0 !important;
 }
 
 .table-container {
@@ -73,11 +94,3 @@ table {
   margin: 0 !important;
   color: red !important;
 }
-
-/* ::ng-deep .mat-menu-panel {
-  min-width: 20px !important;
-}
-
-::ng-deep .mat-menu-item .mat-icon {
-  margin-right: 0px !important;
-} */
