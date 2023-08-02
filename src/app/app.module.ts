@@ -25,6 +25,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { routing } from './app.routing';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -51,9 +52,10 @@ import { MatSelectModule } from '@angular/material/select';
     MatRadioModule,
     MatPaginatorModule,
     MatSelectModule,
+    MatTooltipModule,
+    MatSnackBarModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatSnackBarModule,
     routing,
   ],
   providers: [MessageService],
