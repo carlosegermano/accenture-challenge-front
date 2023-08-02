@@ -17,7 +17,7 @@ table {
   padding-right: 10px;
 }
 
-.add-button {
+.add-company-button {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -25,8 +25,6 @@ table {
   height: 40px;
   margin: 10px;
   padding: 0 8px;
-  background-color: var(--color-secondary);
-  color: var(--color-tertiary);
   font-size: 1em;
 }
 
@@ -45,8 +43,7 @@ table {
 
 .table-container {
   position: relative;
-  min-height: 200px;
-  max-height: 76vh;
+  height: 74vh;
   overflow: auto;
 }
 
@@ -95,10 +92,9 @@ table {
   color: red !important;
 }
 
-/* ::ng-deep .mat-menu-panel {
-  min-width: 20px !important;
+.pagination-tab {
+  position: fixed;
+  bottom: 3px;
+  width: calc(100vw - 10px);
+  margin-left: 0.2px;
 }
-
-::ng-deep .mat-menu-item .mat-icon {
-  margin-right: 0px !important;
-} */

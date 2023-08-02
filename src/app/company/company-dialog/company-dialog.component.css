@@ -19,6 +19,7 @@ mat-form-field {
 .buttons-actions {
   display: flex;
   justify-content: center;
+  margin-button: 30px;
 }
 
 .save-button {

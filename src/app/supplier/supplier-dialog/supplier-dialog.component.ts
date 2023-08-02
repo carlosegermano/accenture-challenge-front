@@ -9,7 +9,6 @@ import { Person, Supplier } from '../supplier.model';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SupplierService } from 'src/app/services/supplier.service';
 import { MessageService } from 'src/app/services/message.service';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 
 interface DialogData {
@@ -24,7 +23,6 @@ interface DialogData {
 })
 export class SupplierDialogComponent {
   title: string = '';
-  labelPosition: 'before' | 'after' = 'after';
 
   supplier!: Supplier;
 
@@ -41,7 +39,7 @@ export class SupplierDialogComponent {
       Validators.pattern('([\\d]{8})'),
     ]),
     nationalId: new FormControl('', [Validators.pattern('([\\d]{7})')]),
-    birthday: new FormControl(),
+    birthday: new FormControl(''),
   });
 
   constructor(
@@ -68,28 +66,22 @@ export class SupplierDialogComponent {
   }
 
   saveSupplier() {
-    if (
-      this.supplierForm.value.nationalDocument != undefined &&
-      this.supplierForm.value.nationalDocument.length == 11
-    ) {
+    const document = this.supplierForm.value.nationalDocument;
+    if (document != undefined && document.length == 11) {
       this.supplierForm.value.personType = Person.NATURAL_PERSON.toString();
-    } else if (
-      this.supplierForm.value.nationalDocument != undefined &&
-      this.supplierForm.value.nationalDocument.length == 14
-    ) {
+    } else if (document != undefined && document.length == 14) {
       this.supplierForm.value.personType = Person.LEGAL_PERSON.toString();
     }
 
     if (this.supplier?.id === undefined || this.supplier?.id === null) {
       this.supplierService.saveSupplier(this.supplierForm.value).subscribe(
-        (obj) => {
+        () => {
           this.messageService.showSuccessMessage(
             'Fornecedor salvo com sucesso!'
           );
           this.dialogRef.close();
         },
         (error) => {
-          debugger;
           if (error.error.errors != undefined) {
             this.messageService.showErrorMessage(
               JSON.stringify(error.error.errors[0].message)
@@ -112,7 +104,15 @@ export class SupplierDialogComponent {
             this.dialogRef.close();
           },
           (error) => {
-            this.messageService.showErrorMessage(error.error.message);
+            if (error.error.errors != undefined) {
+              this.messageService.showErrorMessage(
+                JSON.stringify(error.error.errors[0].message)
+              );
+            } else {
+              this.messageService.showErrorMessage(
+                JSON.stringify(error.error.message)
+              );
+            }
           }
         );
     }

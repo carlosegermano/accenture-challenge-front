@@ -23,6 +23,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 import { routing } from './app.routing';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import { routing } from './app.routing';
     MatDatepickerModule,
     MatNativeDateModule,
     MatRadioModule,
+    MatPaginatorModule,
+    MatSelectModule,
     ReactiveFormsModule,
     HttpClientModule,
     MatSnackBarModule,

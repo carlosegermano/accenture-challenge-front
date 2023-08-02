@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { Supplier } from './supplier.model';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
@@ -6,13 +6,15 @@ import { SupplierDialogComponent } from './supplier-dialog/supplier-dialog.compo
 import { SupplierService } from '../services/supplier.service';
 import { MessageService } from '../services/message.service';
 import { ConfirmationDialogComponent } from '../utils/confirmation-dialog/confirmation-dialog.component';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-supplier',
   templateUrl: './supplier.component.html',
   styleUrls: ['./supplier.component.css'],
 })
-export class SupplierComponent {
+export class SupplierComponent implements OnInit, AfterViewInit {
   supplier!: Supplier;
   suppliers: Supplier[] = [];
   displayedColumns: string[] = [
@@ -29,6 +31,8 @@ export class SupplierComponent {
     this.suppliers
   );
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<Supplier[]>;
 
   constructor(
@@ -39,6 +43,11 @@ export class SupplierComponent {
 
   ngOnInit(): void {
     this.getSuppliers();
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   openAddDialog() {

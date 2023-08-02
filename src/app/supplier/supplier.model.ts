@@ -8,7 +8,7 @@ export interface Supplier {
   email: string;
   zipCode: string;
   nationalId?: string;
-  birthday?: Date;
+  birthday?: string;
   companies?: Company[];
 }
 

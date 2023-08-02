@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Company } from './company.model';
 import { CompanyService } from '../services/company.service';
@@ -6,19 +6,22 @@ import { MatDialog } from '@angular/material/dialog';
 import { CompanyDialogComponent } from './company-dialog/company-dialog.component';
 import { ConfirmationDialogComponent } from '../utils/confirmation-dialog/confirmation-dialog.component';
 import { MessageService } from '../services/message.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-company',
   templateUrl: './company.component.html',
   styleUrls: ['./company.component.css'],
 })
-export class CompanyComponent implements OnInit {
+export class CompanyComponent implements OnInit, AfterViewInit {
   company!: Company;
   companies: Company[] = [];
   displayedColumns: string[] = [
     'id',
     'cnpj',
     'tradeName',
+    'suppliers',
     'zipCode',
     'address',
     'actions',
@@ -26,7 +29,8 @@ export class CompanyComponent implements OnInit {
   dataSource: MatTableDataSource<Company> = new MatTableDataSource(
     this.companies
   );
-
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<Company[]>;
 
   constructor(
@@ -37,6 +41,11 @@ export class CompanyComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCompanies();
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   openAddDialog() {

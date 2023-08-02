@@ -10,7 +10,7 @@
   >
     <p>
       <mat-form-field appearance="fill">
-        <mat-label>Nome</mat-label>
+        <mat-label>CNPJ</mat-label>
         <input
           matInput
           type="text"
@@ -19,9 +19,6 @@
           required
         />
         <mat-hint>Ex.: 12345678901234</mat-hint>
-        <!-- <mat-error *ngIf="cnpj.invalid && (cnpj.dirty || cnpj.touched)"
-        >E-mail inválido!</mat-error
-      > -->
       </mat-form-field>
     </p>
     <p>
@@ -50,9 +47,32 @@
         />
         <mat-icon matSuffix>zipCode</mat-icon>
         <mat-hint>Ex.: 00.000-000</mat-hint>
-        <!-- <mat-error *ngIf="zipCode.invalid && (zipCode.dirty || zipCode.touched)"
-        >Telefone inválido. Digite dessa forma: (99) 99999-9999</mat-error
-      > -->
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <mat-label>Fornecedores</mat-label>
+        <mat-select
+          [formControl]="suppliersControl"
+          [compareWith]="compareWith"
+          multiple
+        >
+          <mat-select-trigger>
+            {{suppliersControl.value?.[0].name || ''}}
+            <span
+              *ngIf="(suppliersControl.value?.length || 0) > 1"
+              class="example-additional-selection"
+            >
+              (+{{ (suppliersControl.value?.length || 0) - 1 }}
+              {{ suppliersControl.value?.length === 2 ? "other" : "others" }})
+            </span>
+          </mat-select-trigger>
+          <mat-option
+            *ngFor="let supplier of supplierList"
+            [value]="supplier"
+            >{{ supplier.name }}</mat-option
+          >
+        </mat-select>
       </mat-form-field>
     </p>
     <div class="buttons-actions">
