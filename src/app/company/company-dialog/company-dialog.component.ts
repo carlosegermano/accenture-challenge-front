@@ -53,7 +53,7 @@ export class CompanyDialogComponent implements OnInit {
     this.company = this.data?.company;
 
     this.getSuppliers();
-    this.suppliersControl.setValue(this.company.suppliers);
+    this.suppliersControl.setValue(this.company?.suppliers);
 
     this.title =
       this.company === undefined || this.company === null

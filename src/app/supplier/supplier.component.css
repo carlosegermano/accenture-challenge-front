@@ -17,6 +17,17 @@ table {
   padding-right: 10px;
 }
 
+.search-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.search-input-field {
+  height: 30px;
+  border: none;
+}
+
 .add-supplier-button {
   display: flex;
   align-items: center;

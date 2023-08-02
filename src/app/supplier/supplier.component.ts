@@ -17,6 +17,7 @@ import { MatSort } from '@angular/material/sort';
 export class SupplierComponent implements OnInit, AfterViewInit {
   supplier!: Supplier;
   suppliers: Supplier[] = [];
+  filteredSuppliers: Supplier[] = [];
   displayedColumns: string[] = [
     'id',
     'nationalDocument',
@@ -43,6 +44,12 @@ export class SupplierComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getSuppliers();
+    this.dataSource.filterPredicate = (data: Supplier, filter: string) => {
+      return (
+        data.name.toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
+        data.nationalDocument.indexOf(filter) !== -1
+      );
+    };
   }
 
   ngAfterViewInit(): void {
@@ -114,5 +121,9 @@ export class SupplierComponent implements OnInit, AfterViewInit {
         );
       }
     );
+  }
+
+  filterData($event: any) {
+    this.dataSource.filter = $event.target.value;
   }
 }
